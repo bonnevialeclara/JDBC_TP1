@@ -175,5 +175,30 @@ public class DAO {
             
             //throw new UnsupportedOperationException("Pas encore implémenté");
 	}
+        
+        List listStates() throws DAOException{
+            List result=new LinkedList();
+            String sql="SELECT DISTINCT STATE FROM CUSTOMER";
+            
+            try (Connection connection = myDataSource.getConnection(); // Ouvrir une connexion
+			Statement stmt = connection.createStatement(); // On crée un statement pour exécuter une requête
+                        
+                ) {
+                        
+			try(ResultSet rs = stmt.executeQuery(sql)){
+                            while (rs.next()) {
+                                result.add(rs);
+                            }
+                            
+                        }
+                        
+		} catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new DAOException(ex.getMessage());
+		}
+            
+                return result;
+            
+        }
 
 }
