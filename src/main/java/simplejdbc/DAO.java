@@ -177,7 +177,7 @@ public class DAO {
 	}
         
         List listStates() throws DAOException{
-            List result=new LinkedList();
+            List<String> result=new LinkedList();
             String sql="SELECT DISTINCT STATE FROM CUSTOMER";
             
             try (Connection connection = myDataSource.getConnection(); // Ouvrir une connexion
@@ -187,7 +187,7 @@ public class DAO {
                         
 			try(ResultSet rs = stmt.executeQuery(sql)){
                             while (rs.next()) {
-                                result.add(rs);
+                                result.add(rs.getString("State"));
                             }
                             
                         }
